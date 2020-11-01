@@ -1,0 +1,75 @@
+<div th:insert="parts/header.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<div class="container mt-4" xmlns:th="http://www.w3.org/1999/xhtml">
+    <h4> Добавление нового пользователя</h4>
+    <br>
+
+    <form th:action="@{/first}" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Логин</label>
+                <input type="text" class="form-control" name="username"
+                       oninvalid="this.setCustomValidity('Только латинские символы, минимум 3 символа')" oninput="setCustomValidity('')"
+                       pattern="^[a-zA-Z]{3,}" required placeholder="Логин">
+            </div>
+            <div class="form-group col-md-3">
+                <label>Пароль</label>
+                <input type="text" class="form-control" name="password" placeholder="Пароль"
+                       oninvalid="this.setCustomValidity('Только латинские символы (минимум 1) и минимум 1 цифра')" oninput="setCustomValidity('')"
+                       pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,}$" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Имя</label>
+                <input type="text" class="form-control" name="firstName" placeholder="Имя"
+                       oninvalid="this.setCustomValidity('Только латинские символы, от 1 до 16')" oninput="setCustomValidity('')"
+                       pattern="[A-Za-z]{1,16}" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Пароль</label>
+                <input type="text" class="form-control" name="lastName" placeholder="Фамилия"
+                       oninvalid="this.setCustomValidity('Только латинские символы, от 1 до 16')" oninput="setCustomValidity('')"
+                       pattern="[A-Za-z]{1,16}" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Роль</label>
+                <select class="form-control" name="roles">
+                    <option disabled>Выбрать роль</option>
+                    <option value="USER">Пользователь</option>
+                    <option value="ADMIN">Администратор</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Статус</label>
+                <select class="form-control" name="status">
+                    <option disabled>Выбрать статус</option>
+                    <option value="ACTIVE">Активный</option>
+                    <option value="INACTIVE">Неактивный</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Добавить пользователя</button>
+            </div>
+        </div>
+        <br>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <span th:if="${success}" th:text="${success}" class="alert alert-success"/>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
+</div>
+<div th:insert="parts/footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

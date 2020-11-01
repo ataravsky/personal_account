@@ -1,0 +1,26 @@
+<div th:insert="parts/header.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"/>
+<div class="container mt-4" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <h4>Пользователь <a th:text="${user.username}"/></h4>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a th:text="${user.firstName}+' '+${user.lastName}"/></li>
+                <li class="list-group-item"><a th:each="role : *{user.roles}" th:text="${role}"/></li>
+                <li class="list-group-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{|/user/${user.id}/edit|}">Редактировать</a></li>
+                <li class="list-group-item" sec:authorize="hasAuthority('ADMIN')">
+                    <form th:action="@{|/user/${user.id}|}" class="custom-control custom-switch" method="post">
+                        <input type="checkbox" value="ACTIVE" class="custom-control-input" id="customSwitch1"
+                               name="status" th:checked="${user.status == 'ACTIVE'}">
+                        <label class="custom-control-label" for="customSwitch1">Активен   </label>
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Обновить</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
+<div th:insert="parts/footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

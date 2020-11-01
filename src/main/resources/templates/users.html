@@ -1,0 +1,58 @@
+<div th:insert="parts/header.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<div class="container mt-4" xmlns:th="http://www.w3.org/1999/xhtml">
+    <h4>Список всех пользователей</h4>
+    <br>
+    <form method="get" action="/user">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <input  type="text" class="form-control" name="username" th:value="${username}" placeholder="Пользователь">
+            </div>
+
+            <div class="form-group col-md-3">
+                <select class="form-control" name="role">
+                    <option value="">Выбрать роль</option>
+                    <option th:selected="${role == 'ADMIN'}" value="ADMIN">Администратор</option>
+                    <option th:selected="${role == 'USER'}" value="USER">Пользователь</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary mr-2" type="submit">Отфильтровать</button>
+            </div>
+            <div class="form-group">
+                <a href="/user" class="btn btn-primary">Очистить фильтр</a>
+            </div>
+        </div>
+    </form>
+    <br>
+<table class="table table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Логин</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Состояние</th>
+            <th>Дата</th>
+            <th>Роль</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr th:each="user : ${user}">
+        <td scope="row" th:text="${user.id}"/>
+        <td th:text="${user.username}"/>
+        <td th:text="${user.firstName}"/>
+        <td th:text="${user.lastName}"/>
+        <td th:text="${user.status}"/>
+        <td th:text="${user.date}"/>
+        <td th:each="role : *{user.roles}" th:text="${role}"></td>
+        <td><a th:href="@{'/user/' + ${user.id}}">Подробнее</a></td>
+    </tr>
+</table>
+    <ul th:if="${numPage.totalPages > 0}" class="pagination">
+        <li th:each="pageNumber : ${numbers}" th:class="${pageNumber == numPage.number} ? 'page-item active' : page-item">
+            <a class="page-link" th:href="@{'/user?page=' + ${pageNumber}} + '&username=' + ${username} + '&role=' + ${role}" th:text="${pageNumber + 1}"/>
+        </li>
+    </ul>
+</div>
+<div th:insert="parts/footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

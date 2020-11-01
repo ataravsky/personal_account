@@ -1,0 +1,24 @@
+
+<div th:insert="parts/header.html :: header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<div class="container mt-4" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="row justify-content-center">
+        <div class="form-group col-md-3">
+            <form class="form-signin" th:action="@{/login}" method="post">
+                <h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
+                <label  class="sr-only">Логин</label>
+                <input type="text" name="username" class="form-control" placeholder="Логин" required="">
+                <br>
+                <label class="sr-only">Пароль</label>
+                <input type="text" name="password" class="form-control" placeholder="Пароль">
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                <br>
+                <a href="/first">Первая регистрация</a>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+<div th:insert="parts/footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
