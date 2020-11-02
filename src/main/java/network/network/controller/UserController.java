@@ -128,7 +128,6 @@ public class UserController {
                            @RequestParam("username") String username,
                            @RequestParam("lastName") String lastName,
                            @RequestParam("firstName") String firstName,
-                           @RequestParam("password") String password,
                            @RequestParam("status") String status,
                            @RequestParam("role") String role,
                            Model model
@@ -140,7 +139,6 @@ public class UserController {
             user.getRoles().add(Role.valueOf(role));
             user.setStatus(status);
             user.setFirstName(firstName);
-            user.setPassword(password);
             user.setUsername(username);
         System.out.println(user.getUsername());
             user.setLastName(lastName);
